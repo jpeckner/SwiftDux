@@ -12,4 +12,4 @@ Simply add SwiftDux.xcodeproj to your workspace, or add `github "jpeckner/SwiftD
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
