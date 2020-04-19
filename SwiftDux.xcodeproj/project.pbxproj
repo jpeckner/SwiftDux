@@ -28,6 +28,7 @@
 		CA26364D2204D99B0012B60E /* OperationQueue+CurrentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA26364C2204D99B0012B60E /* OperationQueue+CurrentTests.swift */; };
 		CA39F98B22092F42006F505A /* StoreStateSubscriptionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA39F98A22092F42006F505A /* StoreStateSubscriptionTests.swift */; };
 		CA39F98E220A0E56006F505A /* StoreSubscriptionNotificationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F39F371D3EE46A00DFFE62 /* StoreSubscriptionNotificationTests.swift */; };
+		CA4C29A7244B87D2003A3B55 /* StubAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA4C29A5244B87B6003A3B55 /* StubAction.swift */; };
 		CA56F51D2220A12E005DF590 /* StoreResetTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA56F51C2220A12E005DF590 /* StoreResetTests.swift */; };
 		CA89B87B22B2C70D00CBECE0 /* EquatableKeyPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA89B87A22B2C70D00CBECE0 /* EquatableKeyPath.swift */; };
 		CA89B87F22B2D8F300CBECE0 /* TestAppAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA89B87C22B2D8AF00CBECE0 /* TestAppAction.swift */; };
@@ -93,6 +94,7 @@
 		CA26364C2204D99B0012B60E /* OperationQueue+CurrentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OperationQueue+CurrentTests.swift"; sourceTree = "<group>"; };
 		CA39F98A22092F42006F505A /* StoreStateSubscriptionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreStateSubscriptionTests.swift; sourceTree = "<group>"; };
 		CA39F98F220A3FCA006F505A /* XCTestCase+Expectations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+Expectations.swift"; sourceTree = "<group>"; };
+		CA4C29A5244B87B6003A3B55 /* StubAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubAction.swift; sourceTree = "<group>"; };
 		CA56F51C2220A12E005DF590 /* StoreResetTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreResetTests.swift; sourceTree = "<group>"; };
 		CA89B87A22B2C70D00CBECE0 /* EquatableKeyPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EquatableKeyPath.swift; sourceTree = "<group>"; };
 		CA89B87C22B2D8AF00CBECE0 /* TestAppAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestAppAction.swift; sourceTree = "<group>"; };
@@ -250,6 +252,7 @@
 				259737FA1C2C618A00869B8F /* Subscription+Mock.swift */,
 				CA89B87C22B2D8AF00CBECE0 /* TestAppAction.swift */,
 				CA0B17B4220D38D40059C8C3 /* TestAppState.swift */,
+				CA4C29A5244B87B6003A3B55 /* StubAction.swift */,
 			);
 			path = CoreTypes;
 			sourceTree = "<group>";
@@ -448,6 +451,7 @@
 				CA89B87F22B2D8F300CBECE0 /* TestAppAction.swift in Sources */,
 				CA0B17B6220D38D40059C8C3 /* TestAppState.swift in Sources */,
 				CA0B17A5220CF7440059C8C3 /* XCTestCase+Expectations.swift in Sources */,
+				CA4C29A7244B87D2003A3B55 /* StubAction.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
