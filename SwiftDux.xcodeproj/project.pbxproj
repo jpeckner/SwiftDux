@@ -324,9 +324,9 @@
 			productReference = 625E66831C1FF97E0027C288 /* SwiftDux.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		625E66991C1FFA3C0027C288 /* SwiftDux-iOSTests */ = {
+		625E66991C1FFA3C0027C288 /* SwiftDuxTests-iOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 625E66A21C1FFA3C0027C288 /* Build configuration list for PBXNativeTarget "SwiftDux-iOSTests" */;
+			buildConfigurationList = 625E66A21C1FFA3C0027C288 /* Build configuration list for PBXNativeTarget "SwiftDuxTests-iOS" */;
 			buildPhases = (
 				625E66961C1FFA3C0027C288 /* Sources */,
 				625E66971C1FFA3C0027C288 /* Frameworks */,
@@ -337,14 +337,14 @@
 				625E66A11C1FFA3C0027C288 /* PBXTargetDependency */,
 				CA0B17A9220CF8C80059C8C3 /* PBXTargetDependency */,
 			);
-			name = "SwiftDux-iOSTests";
+			name = "SwiftDuxTests-iOS";
 			productName = SwiftDuxTests;
 			productReference = 625E669A1C1FFA3C0027C288 /* SwiftDuxTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		CA0B179A220CF5790059C8C3 /* SwiftDux-iOSTestComponents */ = {
+		CA0B179A220CF5790059C8C3 /* SwiftDuxTestComponents-iOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = CA0B17A0220CF5790059C8C3 /* Build configuration list for PBXNativeTarget "SwiftDux-iOSTestComponents" */;
+			buildConfigurationList = CA0B17A0220CF5790059C8C3 /* Build configuration list for PBXNativeTarget "SwiftDuxTestComponents-iOS" */;
 			buildPhases = (
 				CA0B1796220CF5790059C8C3 /* Headers */,
 				CA0B1797220CF5790059C8C3 /* Sources */,
@@ -354,7 +354,7 @@
 			dependencies = (
 				CA0B17A7220CF8BE0059C8C3 /* PBXTargetDependency */,
 			);
-			name = "SwiftDux-iOSTestComponents";
+			name = "SwiftDuxTestComponents-iOS";
 			productName = "SwiftDux-iOSTestComponents";
 			productReference = CA0B179B220CF5790059C8C3 /* SwiftDuxTestComponents.framework */;
 			productType = "com.apple.product-type.framework";
@@ -398,8 +398,8 @@
 			projectRoot = "";
 			targets = (
 				625E66821C1FF97E0027C288 /* SwiftDux-iOS */,
-				CA0B179A220CF5790059C8C3 /* SwiftDux-iOSTestComponents */,
-				625E66991C1FFA3C0027C288 /* SwiftDux-iOSTests */,
+				CA0B179A220CF5790059C8C3 /* SwiftDuxTestComponents-iOS */,
+				625E66991C1FFA3C0027C288 /* SwiftDuxTests-iOS */,
 			);
 		};
 /* End PBXProject section */
@@ -470,7 +470,7 @@
 		};
 		CA0B17A9220CF8C80059C8C3 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = CA0B179A220CF5790059C8C3 /* SwiftDux-iOSTestComponents */;
+			target = CA0B179A220CF5790059C8C3 /* SwiftDuxTestComponents-iOS */;
 			targetProxy = CA0B17A8220CF8C80059C8C3 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -758,7 +758,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		625E66A21C1FFA3C0027C288 /* Build configuration list for PBXNativeTarget "SwiftDux-iOSTests" */ = {
+		625E66A21C1FFA3C0027C288 /* Build configuration list for PBXNativeTarget "SwiftDuxTests-iOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				625E66A31C1FFA3C0027C288 /* Debug */,
@@ -767,7 +767,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		CA0B17A0220CF5790059C8C3 /* Build configuration list for PBXNativeTarget "SwiftDux-iOSTestComponents" */ = {
+		CA0B17A0220CF5790059C8C3 /* Build configuration list for PBXNativeTarget "SwiftDuxTestComponents-iOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				CA0B17A1220CF5790059C8C3 /* Debug */,
