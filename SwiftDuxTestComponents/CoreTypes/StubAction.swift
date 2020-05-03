@@ -1,6 +1,6 @@
 //
 //  StubAction.swift
-//  SwiftDux
+//  SwiftDuxTestComponents
 //
 //  Created by Justin Peckner.
 //  Copyright © 2020 Justin Peckner. All rights reserved.

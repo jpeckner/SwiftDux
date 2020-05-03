@@ -1,6 +1,6 @@
 //
 //  TestAppAction.swift
-//  SwiftDux-iOS
+//  SwiftDuxTestComponents
 //
 //  Created by Justin Peckner.
 //  Copyright © 2019 Justin Peckner. All rights reserved.
