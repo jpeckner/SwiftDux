@@ -14,9 +14,37 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
+               BlueprintIdentifier = "625E66821C1FF97E0027C288"
+               BuildableName = "SwiftDux.framework"
+               BlueprintName = "SwiftDux-iOS"
+               ReferencedContainer = "container:SwiftDux.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
                BlueprintIdentifier = "CA5EC9E3245E3D7D007FFE3B"
                BuildableName = "SwiftDuxExtensions.framework"
                BlueprintName = "SwiftDuxExtensions-iOS"
+               ReferencedContainer = "container:SwiftDux.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "NO"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "625E66991C1FFA3C0027C288"
+               BuildableName = "SwiftDuxTests.xctest"
+               BlueprintName = "SwiftDuxTests-iOS"
                ReferencedContainer = "container:SwiftDux.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -42,6 +70,17 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO"
+            testExecutionOrdering = "random">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "625E66991C1FFA3C0027C288"
+               BuildableName = "SwiftDuxTests.xctest"
+               BlueprintName = "SwiftDuxTests-iOS"
+               ReferencedContainer = "container:SwiftDux.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
          <TestableReference
             skipped = "NO"
             testExecutionOrdering = "random">
