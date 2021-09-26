@@ -8,22 +8,21 @@
 
 import Foundation
 import SwiftDuxExtensions
-import SwiftDuxTestComponents
 
-class MockEntityService {
+public class MockEntityService {
 
     private let returnedResult: Result<StubEntity, StubError>
     private let responseQueue: DispatchQueue
 
-    private(set) var fetchStubEntityCalled = false
+    public private(set) var fetchStubEntityCalled = false
 
-    init(returnedResult: Result<StubEntity, StubError>,
-         responseQueue: DispatchQueue = .global()) {
+    public init(returnedResult: Result<StubEntity, StubError>,
+                responseQueue: DispatchQueue = .global()) {
         self.returnedResult = returnedResult
         self.responseQueue = responseQueue
     }
 
-    func fetchStubEntity(completion: @escaping (Result<StubEntity, StubError>) -> Void) {
+    public func fetchStubEntity(completion: @escaping (Result<StubEntity, StubError>) -> Void) {
         fetchStubEntityCalled = true
 
         responseQueue.async {

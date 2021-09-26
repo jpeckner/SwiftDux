@@ -7,11 +7,10 @@
 //
 
 import Foundation
-import SwiftDuxTestComponents
 
-class MockThrowingEntityService {
+public class MockThrowingEntityService {
 
-    enum CourseOfAction {
+    public enum CourseOfAction {
         case throwError(Error)
         case callbackWithResult(Result<StubEntity, StubError>)
     }
@@ -19,15 +18,15 @@ class MockThrowingEntityService {
     private let courseOfAction: CourseOfAction
     private let responseQueue: DispatchQueue
 
-    private(set) var fetchStubEntityCalled = false
+    public private(set) var fetchStubEntityCalled = false
 
-    init(courseOfAction: CourseOfAction,
-         responseQueue: DispatchQueue = .global()) {
+    public init(courseOfAction: CourseOfAction,
+                responseQueue: DispatchQueue = .global()) {
         self.courseOfAction = courseOfAction
         self.responseQueue = responseQueue
     }
 
-    func fetchStubEntity(completion: @escaping (Result<StubEntity, StubError>) -> Void) throws {
+    public func fetchStubEntity(completion: @escaping (Result<StubEntity, StubError>) -> Void) throws {
         fetchStubEntityCalled = true
 
         switch courseOfAction {

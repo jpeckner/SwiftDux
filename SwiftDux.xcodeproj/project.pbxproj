@@ -52,11 +52,11 @@
 		CA5ECA50245E4BE5007FFE3B /* StubEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA5ECA46245E4BE5007FFE3B /* StubEntity.swift */; };
 		CA5ECA51245E4BE5007FFE3B /* Subscription+Mock.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA5ECA47245E4BE5007FFE3B /* Subscription+Mock.swift */; };
 		CA5ECA52245E4BE5007FFE3B /* TestAppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA5ECA48245E4BE5007FFE3B /* TestAppState.swift */; };
-		CA5ECA54245E4C48007FFE3B /* MockEntityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA5ECA3F245E4BE5007FFE3B /* MockEntityService.swift */; };
-		CA5ECA55245E4C48007FFE3B /* MockThrowingEntityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA5ECA41245E4BE5007FFE3B /* MockThrowingEntityService.swift */; };
-		CA5ECA56245E4C48007FFE3B /* StubGuaranteedEntityState.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA5ECA42245E4BE5007FFE3B /* StubGuaranteedEntityState.swift */; };
-		CA5ECA5B245E4D27007FFE3B /* StubError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA5ECA5A245E4D27007FFE3B /* StubError.swift */; };
 		CA5ECA64245E532D007FFE3B /* IntermediateStepReducerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA5ECA63245E532D007FFE3B /* IntermediateStepReducerTests.swift */; };
+		CA81828126CF5FB7007152B2 /* MockEntityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA5ECA3F245E4BE5007FFE3B /* MockEntityService.swift */; };
+		CA81828226CF5FB7007152B2 /* StubGuaranteedEntityState.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA5ECA42245E4BE5007FFE3B /* StubGuaranteedEntityState.swift */; };
+		CA81828326CF5FB7007152B2 /* StubError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA5ECA5A245E4D27007FFE3B /* StubError.swift */; };
+		CA81828426CF5FB7007152B2 /* MockThrowingEntityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA5ECA41245E4BE5007FFE3B /* MockThrowingEntityService.swift */; };
 		CA89B87B22B2C70D00CBECE0 /* EquatableKeyPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA89B87A22B2C70D00CBECE0 /* EquatableKeyPath.swift */; };
 		CACCF15B221F94730070B8C7 /* SubstateSubscriptionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CACCF15A221F94730070B8C7 /* SubstateSubscriptionTests.swift */; };
 		CAEE02852223B6ED0017DDE6 /* SubscribableStoreProtocol+Equatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAEE02842223B6ED0017DDE6 /* SubscribableStoreProtocol+Equatable.swift */; };
@@ -217,7 +217,7 @@
 				CA5EC9E5245E3D7D007FFE3B /* SwiftDuxExtensions */,
 				CA0B173D220CE3ED0059C8C3 /* SwiftDuxTestComponents */,
 				625E669B1C1FFA3C0027C288 /* SwiftDuxTests */,
-				CA5ECA1C245E49FB007FFE3B /* SwiftDuxExtensionsTests-iOS */,
+				CA5ECA1C245E49FB007FFE3B /* SwiftDuxExtensionsTests */,
 				625E66841C1FF97E0027C288 /* Products */,
 				94839D2BD4CCEE6386BD477E /* Frameworks */,
 			);
@@ -282,6 +282,7 @@
 		CA0B173D220CE3ED0059C8C3 /* SwiftDuxTestComponents */ = {
 			isa = PBXGroup;
 			children = (
+				CA5ECA53245E4C07007FFE3B /* Components */,
 				CA89B87E22B2D8E500CBECE0 /* CoreTypes */,
 				CA89B88022B2D8FA00CBECE0 /* Extensions */,
 				CA0B179E220CF5790059C8C3 /* Info.plist */,
@@ -379,14 +380,13 @@
 			path = Entity;
 			sourceTree = "<group>";
 		};
-		CA5ECA1C245E49FB007FFE3B /* SwiftDuxExtensionsTests-iOS */ = {
+		CA5ECA1C245E49FB007FFE3B /* SwiftDuxExtensionsTests */ = {
 			isa = PBXGroup;
 			children = (
-				CA5ECA53245E4C07007FFE3B /* Components */,
 				CA5ECA61245E5306007FFE3B /* Tests */,
 				CA5ECA1F245E49FB007FFE3B /* Info.plist */,
 			);
-			path = "SwiftDuxExtensionsTests-iOS";
+			path = SwiftDuxExtensionsTests;
 			sourceTree = "<group>";
 		};
 		CA5ECA26245E4A43007FFE3B /* Entity */ = {
@@ -721,6 +721,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CA81828426CF5FB7007152B2 /* MockThrowingEntityService.swift in Sources */,
 				CA5ECA50245E4BE5007FFE3B /* StubEntity.swift in Sources */,
 				CA5ECA4D245E4BE5007FFE3B /* Store+Mock.swift in Sources */,
 				CA5ECA4A245E4BE5007FFE3B /* StubAction.swift in Sources */,
@@ -729,6 +730,9 @@
 				CA5ECA51245E4BE5007FFE3B /* Subscription+Mock.swift in Sources */,
 				CA0B17A5220CF7440059C8C3 /* XCTestCase+Expectations.swift in Sources */,
 				CA5ECA52245E4BE5007FFE3B /* TestAppState.swift in Sources */,
+				CA81828226CF5FB7007152B2 /* StubGuaranteedEntityState.swift in Sources */,
+				CA81828326CF5FB7007152B2 /* StubError.swift in Sources */,
+				CA81828126CF5FB7007152B2 /* MockEntityService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -752,15 +756,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CA5ECA55245E4C48007FFE3B /* MockThrowingEntityService.swift in Sources */,
 				CA5ECA33245E4A43007FFE3B /* GuaranteedEntityReducerTests.swift in Sources */,
-				CA5ECA54245E4C48007FFE3B /* MockEntityService.swift in Sources */,
 				CA5ECA2F245E4A43007FFE3B /* EntityReducerTests.swift in Sources */,
 				CA5ECA31245E4A43007FFE3B /* GuaranteedEntityStateTests.swift in Sources */,
 				CA5ECA32245E4A43007FFE3B /* GuaranteedEntityActionCreatorTests.swift in Sources */,
 				CA5ECA30245E4A43007FFE3B /* EntityStateTests.swift in Sources */,
-				CA5ECA56245E4C48007FFE3B /* StubGuaranteedEntityState.swift in Sources */,
-				CA5ECA5B245E4D27007FFE3B /* StubError.swift in Sources */,
 				CA5ECA2E245E4A43007FFE3B /* EntityActionCreatorTests.swift in Sources */,
 				CA5ECA64245E532D007FFE3B /* IntermediateStepReducerTests.swift in Sources */,
 			);
@@ -941,6 +941,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.1.1;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -963,6 +964,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.1.1;
 				SKIP_INSTALL = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
@@ -1033,6 +1035,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.1.1;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				OTHER_LDFLAGS = (
@@ -1076,6 +1079,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.1.1;
 				MTL_FAST_MATH = YES;
 				OTHER_LDFLAGS = (
 					"-weak_framework",
@@ -1113,6 +1117,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.1.1;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.justinpeckner.SwiftDuxExtensions;
@@ -1149,6 +1154,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.1.1;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.justinpeckner.SwiftDuxExtensions;
 				PRODUCT_NAME = SwiftDuxExtensions;
@@ -1169,7 +1175,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_STYLE = Automatic;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = "SwiftDuxExtensionsTests-iOS/Info.plist";
+				INFOPLIST_FILE = SwiftDuxExtensionsTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1197,7 +1203,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_STYLE = Automatic;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = "SwiftDuxExtensionsTests-iOS/Info.plist";
+				INFOPLIST_FILE = SwiftDuxExtensionsTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

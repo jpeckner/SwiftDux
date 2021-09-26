@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum StubError: Error {
+public enum StubError: Error {
     case plainError
     case thrownError
 }
