@@ -24,7 +24,7 @@
 
 import Nimble
 import Quick
-import SwiftDuxExtensions
+import SwiftDux
 import SwiftDuxTestComponents
 
 class GuaranteedEntityReducerTests: QuickSpec {
