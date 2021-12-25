@@ -1,6 +1,6 @@
 //
-//  Action.swift
-//  SwiftDux
+//  IntermediateStepLoadAction.swift
+//  SwiftDuxExtensions
 //
 //  Copyright (c) 2019 Justin Peckner
 //  
@@ -22,4 +22,10 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //  SOFTWARE.
 
-public protocol Action {}
+import Foundation
+
+public enum IntermediateStepLoadAction<TError: Error & Equatable>: Action, Equatable {
+    case inProgress
+    case success
+    case failure(TError)
+}

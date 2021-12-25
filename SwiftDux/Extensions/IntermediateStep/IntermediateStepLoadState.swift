@@ -1,6 +1,6 @@
 //
-//  Action.swift
-//  SwiftDux
+//  IntermediateStepLoadState.swift
+//  SwiftDuxExtensions
 //
 //  Copyright (c) 2019 Justin Peckner
 //  
@@ -22,4 +22,28 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //  SOFTWARE.
 
-public protocol Action {}
+import Foundation
+
+public enum IntermediateStepLoadState<TError: Error & Equatable>: Equatable {
+    case inProgress
+    case success
+    case failure(TError)
+}
+
+public enum IntermediateStepLoadReducer<TError: Error & Equatable> {
+
+    public static func reduce(action: IntermediateStepLoadAction<TError>,
+                              currentState: IntermediateStepLoadState<TError>?) -> IntermediateStepLoadState<TError> {
+        guard currentState != nil else { return .inProgress }
+
+        switch action {
+        case .inProgress:
+            return .inProgress
+        case .success:
+            return .success
+        case let .failure(errorBox):
+            return .failure(errorBox)
+        }
+    }
+
+}

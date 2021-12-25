@@ -1,8 +1,8 @@
 //
-//  Action.swift
-//  SwiftDux
+//  EquatableError.swift
+//  SwiftDuxExtensions-iOS
 //
-//  Copyright (c) 2019 Justin Peckner
+//  Copyright (c) 2020 Justin Peckner
 //  
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -22,4 +22,20 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //  SOFTWARE.
 
-public protocol Action {}
+import Foundation
+
+public struct EquatableError {
+    public let value: Error
+
+    public init(_ value: Error) {
+        self.value = value
+    }
+}
+
+extension EquatableError: Equatable {
+
+    public static func == (lhs: EquatableError, rhs: EquatableError) -> Bool {
+        return true
+    }
+
+}

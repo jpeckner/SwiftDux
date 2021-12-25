@@ -1,6 +1,6 @@
 //
-//  Action.swift
-//  SwiftDux
+//  EntityLoadBlock.swift
+//  SwiftDuxExtensions
 //
 //  Copyright (c) 2019 Justin Peckner
 //  
@@ -22,4 +22,9 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //  SOFTWARE.
 
-public protocol Action {}
+import Foundation
+
+public enum EntityLoadBlock<TEntity: Equatable, TError: Error> {
+    case nonThrowing((@escaping (Result<TEntity, TError>) -> Void) -> Void)
+    case throwing((@escaping (Result<TEntity, TError>) -> Void) throws -> Void)
+}
