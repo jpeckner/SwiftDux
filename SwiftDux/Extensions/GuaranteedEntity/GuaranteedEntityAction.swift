@@ -23,7 +23,6 @@
 //  SOFTWARE.
 
 import Foundation
-import SwiftDux
 
 public enum GuaranteedEntityAction<TEntity: Equatable>: Action, Equatable {
     case inProgress

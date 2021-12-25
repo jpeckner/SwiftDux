@@ -25,7 +25,6 @@
 import Nimble
 import Quick
 import SwiftDux
-import SwiftDuxExtensions
 import SwiftDuxTestComponents
 
 private enum TestGuaranteedEntityActionCreator: GuaranteedEntityActionCreator {}

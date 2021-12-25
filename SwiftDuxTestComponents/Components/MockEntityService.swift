@@ -23,7 +23,6 @@
 //  SOFTWARE.
 
 import Foundation
-import SwiftDuxExtensions
 
 public class MockEntityService {
 

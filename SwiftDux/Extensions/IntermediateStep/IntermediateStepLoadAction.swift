@@ -1,8 +1,8 @@
 //
-//  SwiftDuxExtensions_iOS.h
-//  SwiftDuxExtensions-iOS
+//  IntermediateStepLoadAction.swift
+//  SwiftDuxExtensions
 //
-//  Copyright (c) 2020 Justin Peckner
+//  Copyright (c) 2019 Justin Peckner
 //  
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -22,14 +22,10 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //  SOFTWARE.
 
-#import <Foundation/Foundation.h>
+import Foundation
 
-//! Project version number for SwiftDuxExtensions_iOS.
-FOUNDATION_EXPORT double SwiftDuxExtensions_iOSVersionNumber;
-
-//! Project version string for SwiftDuxExtensions_iOS.
-FOUNDATION_EXPORT const unsigned char SwiftDuxExtensions_iOSVersionString[];
-
-// In this header, you should import all the public headers of your framework using statements like #import <SwiftDuxExtensions_iOS/PublicHeader.h>
-
-
+public enum IntermediateStepLoadAction<TError: Error & Equatable>: Action, Equatable {
+    case inProgress
+    case success
+    case failure(TError)
+}

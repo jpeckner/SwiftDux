@@ -23,7 +23,6 @@
 //  SOFTWARE.
 
 import Foundation
-import SwiftDux
 
 public enum EntityAction<TEntity: Equatable>: Action, Equatable {
     case idle
