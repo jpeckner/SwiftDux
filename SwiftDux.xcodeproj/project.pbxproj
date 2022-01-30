@@ -872,7 +872,7 @@
 				OTHER_LDFLAGS = (
 					"-weak_framework",
 					XCTest,
-					"-weak-lswiftXCTest",
+					"-weak-lXCTestSwiftSupport",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.justinpeckner.SwiftDuxTestComponents;
 				PRODUCT_NAME = SwiftDuxTestComponents;
@@ -915,7 +915,7 @@
 				OTHER_LDFLAGS = (
 					"-weak_framework",
 					XCTest,
-					"-weak-lswiftXCTest",
+					"-weak-lXCTestSwiftSupport",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.justinpeckner.SwiftDuxTestComponents;
 				PRODUCT_NAME = SwiftDuxTestComponents;
