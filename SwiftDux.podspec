@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name = 'SwiftDux'
-  s.version = '1.1.3'
+  s.version = '1.1.4'
   s.summary = 'SwiftDux is a straightforward, thread-safe implementation of Redux in Swift.'
   s.homepage = 'https://github.com/jpeckner/SwiftDux'
   s.authors = { 'Justin Peckner' => 'pecknerj@gmail.com' }
