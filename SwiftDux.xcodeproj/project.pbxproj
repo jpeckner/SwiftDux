@@ -51,6 +51,8 @@
 		CA5ECA50245E4BE5007FFE3B /* StubEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA5ECA46245E4BE5007FFE3B /* StubEntity.swift */; };
 		CA5ECA51245E4BE5007FFE3B /* Subscription+Mock.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA5ECA47245E4BE5007FFE3B /* Subscription+Mock.swift */; };
 		CA5ECA52245E4BE5007FFE3B /* TestAppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA5ECA48245E4BE5007FFE3B /* TestAppState.swift */; };
+		CA5F848927E7880300EEF854 /* TestDispatchingStoreProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA5F848827E7880300EEF854 /* TestDispatchingStoreProtocol.swift */; };
+		CA5F848B27E78CFE00EEF854 /* Store+Spy.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA5F848A27E78CFE00EEF854 /* Store+Spy.swift */; };
 		CA81828126CF5FB7007152B2 /* MockEntityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA5ECA3F245E4BE5007FFE3B /* MockEntityService.swift */; };
 		CA81828226CF5FB7007152B2 /* StubGuaranteedEntityState.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA5ECA42245E4BE5007FFE3B /* StubGuaranteedEntityState.swift */; };
 		CA81828326CF5FB7007152B2 /* StubError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA5ECA5A245E4D27007FFE3B /* StubError.swift */; };
@@ -142,6 +144,8 @@
 		CA5ECA48245E4BE5007FFE3B /* TestAppState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestAppState.swift; sourceTree = "<group>"; };
 		CA5ECA5A245E4D27007FFE3B /* StubError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubError.swift; sourceTree = "<group>"; };
 		CA5ECA63245E532D007FFE3B /* IntermediateStepReducerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntermediateStepReducerTests.swift; sourceTree = "<group>"; };
+		CA5F848827E7880300EEF854 /* TestDispatchingStoreProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestDispatchingStoreProtocol.swift; sourceTree = "<group>"; };
+		CA5F848A27E78CFE00EEF854 /* Store+Spy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Store+Spy.swift"; sourceTree = "<group>"; };
 		CA89B87A22B2C70D00CBECE0 /* EquatableKeyPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EquatableKeyPath.swift; sourceTree = "<group>"; };
 		CACCF15A221F94730070B8C7 /* SubstateSubscriptionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubstateSubscriptionTests.swift; sourceTree = "<group>"; };
 		CAEE02842223B6ED0017DDE6 /* SubscribableStoreProtocol+Equatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SubscribableStoreProtocol+Equatable.swift"; sourceTree = "<group>"; };
@@ -373,12 +377,14 @@
 			isa = PBXGroup;
 			children = (
 				CA5ECA43245E4BE5007FFE3B /* Store+Mock.swift */,
+				CA5F848A27E78CFE00EEF854 /* Store+Spy.swift */,
 				CA5ECA40245E4BE5007FFE3B /* StubAction.swift */,
 				CA5ECA46245E4BE5007FFE3B /* StubEntity.swift */,
 				CA5ECA44245E4BE5007FFE3B /* Subscriber+Mock.swift */,
 				CA5ECA47245E4BE5007FFE3B /* Subscription+Mock.swift */,
 				CA5ECA45245E4BE5007FFE3B /* TestAppAction.swift */,
 				CA5ECA48245E4BE5007FFE3B /* TestAppState.swift */,
+				CA5F848827E7880300EEF854 /* TestDispatchingStoreProtocol.swift */,
 			);
 			path = CoreTypes;
 			sourceTree = "<group>";
@@ -601,7 +607,9 @@
 				CA5ECA4A245E4BE5007FFE3B /* StubAction.swift in Sources */,
 				CA5ECA4E245E4BE5007FFE3B /* Subscriber+Mock.swift in Sources */,
 				CA5ECA4F245E4BE5007FFE3B /* TestAppAction.swift in Sources */,
+				CA5F848B27E78CFE00EEF854 /* Store+Spy.swift in Sources */,
 				CA5ECA51245E4BE5007FFE3B /* Subscription+Mock.swift in Sources */,
+				CA5F848927E7880300EEF854 /* TestDispatchingStoreProtocol.swift in Sources */,
 				CA0B17A5220CF7440059C8C3 /* XCTestCase+Expectations.swift in Sources */,
 				CA5ECA52245E4BE5007FFE3B /* TestAppState.swift in Sources */,
 				CA81828226CF5FB7007152B2 /* StubGuaranteedEntityState.swift in Sources */,

@@ -24,7 +24,7 @@
 
 import Foundation
 
-public class Store<State: StateProtocol>: StoreProtocol {
+open class Store<State: StateProtocol>: StoreProtocol {
 
     private let reducer: Reducer<State>
     private let middleware: [Middleware<State>]
@@ -53,21 +53,21 @@ public class Store<State: StateProtocol>: StoreProtocol {
                                        qualityOfService: qualityOfService)
     }
 
-    public func subscribe<Subscription: StoreSubscriptionProtocol>(
+    open func subscribe<Subscription: StoreSubscriptionProtocol>(
         _ subscription: Subscription
     ) where Subscription.StoreState == State {
         storeFields.subscribe(subscription)
     }
 
-    public func unsubscribe<S: StoreSubscriber>(_ subscriber: S) where S.StoreState == State {
+    open func unsubscribe<S: StoreSubscriber>(_ subscriber: S) where S.StoreState == State {
         storeFields.unsubscribe(subscriber)
     }
 
-    public func dispatch(_ action: Action) {
+    open func dispatch(_ action: Action) {
         storeFields.dispatchFunction(action)
     }
 
-    public func reset(to state: State) {
+    open func reset(to state: State) {
         storeFields.cancelOperations()
 
         storeFields = StoreFields(reducer: reducer,
