@@ -48,10 +48,10 @@ public class StoreStateSubscription<Subscriber: StoreStateSubscriber> {
 
 }
 
-extension StoreStateSubscription where Subscriber.StoreState: Equatable {
+public extension StoreStateSubscription where Subscriber.StoreState: Equatable {
 
-    public convenience init(subscriber: Subscriber,
-                            dispatchQueue: DispatchQueue = .main) {
+    convenience init(subscriber: Subscriber,
+                     dispatchQueue: DispatchQueue = .main) {
         self.init(subscriber: subscriber,
                   equalityBlock: ==,
                   dispatchQueue: dispatchQueue)

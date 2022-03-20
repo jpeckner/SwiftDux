@@ -31,7 +31,7 @@ public struct EquatableKeyPath<StoreState: StateProtocol> {
     public let keyPath: PartialKeyPath<StoreState>
     public let equalityBlock: StateEqualityBlock<StoreState>
 
-    public init<E: Equatable>(_ keyPath: KeyPath<StoreState, E>) {
+    public init<TKeyPath: Equatable>(_ keyPath: KeyPath<StoreState, TKeyPath>) {
         self.keyPath = keyPath
         self.equalityBlock = { $0[keyPath: keyPath] == $1[keyPath: keyPath] }
     }

@@ -24,19 +24,21 @@
 
 import Foundation
 
-// MARK: GuaranteedEntityLoadState
+// MARK: - GuaranteedEntityLoadState
 
-public enum GuaranteedEntityLoadState<TEntity: Equatable>: Action, Equatable {
+public enum GuaranteedEntityLoadState<TEntity>: Action {
     case idle
     case inProgress
     case success(TEntity)
     case failure(EntityError)
 }
 
-// MARK: GuaranteedEntityState
+extension GuaranteedEntityLoadState: Equatable where TEntity: Equatable {}
+
+// MARK: - GuaranteedEntityState
 
 public protocol GuaranteedEntityState {
-    associatedtype TEntity: Equatable
+    associatedtype TEntity
 
     static var fallbackValue: TEntity { get }
 
