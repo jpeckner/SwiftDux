@@ -22,9 +22,9 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //  SOFTWARE.
 
-extension SubscribableStoreProtocol where State: Equatable {
+public extension SubscribableStoreProtocol where State: Equatable {
 
-    public func subscribe<Subscriber: StoreStateSubscriber>(
+    func subscribe<Subscriber: StoreStateSubscriber>(
         _ subscriber: Subscriber
     ) where Subscriber.StoreState == State {
         subscribe(StoreStateSubscription(subscriber: subscriber))
@@ -32,9 +32,9 @@ extension SubscribableStoreProtocol where State: Equatable {
 
 }
 
-extension SubscribableStoreProtocol {
+public extension SubscribableStoreProtocol {
 
-    public func subscribe<Subscriber: SubstatesSubscriber>(
+    func subscribe<Subscriber: SubstatesSubscriber>(
         _ subscriber: Subscriber,
         equatableKeyPaths: Set<EquatableKeyPath<State>>
     ) where Subscriber.StoreState == State {
@@ -42,7 +42,7 @@ extension SubscribableStoreProtocol {
                                         equatableKeyPaths: equatableKeyPaths))
     }
 
-    public func subscribe<Subscriber: SubstatesSubscriber, E: Equatable>(
+    func subscribe<Subscriber: SubstatesSubscriber, E: Equatable>(
         _ subscriber: Subscriber,
         keyPath: KeyPath<State, E>
     ) where Subscriber.StoreState == State {

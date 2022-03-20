@@ -24,13 +24,15 @@
 
 import Foundation
 
-public enum IntermediateStepLoadState<TError: Error & Equatable>: Equatable {
+public enum IntermediateStepLoadState<TError: Error> {
     case inProgress
     case success
     case failure(TError)
 }
 
-public enum IntermediateStepLoadReducer<TError: Error & Equatable> {
+extension IntermediateStepLoadState: Equatable where TError: Equatable {}
+
+public enum IntermediateStepLoadReducer<TError: Error> {
 
     public static func reduce(action: IntermediateStepLoadAction<TError>,
                               currentState: IntermediateStepLoadState<TError>?) -> IntermediateStepLoadState<TError> {

@@ -24,8 +24,10 @@
 
 import Foundation
 
-public enum IntermediateStepLoadAction<TError: Error & Equatable>: Action, Equatable {
+public enum IntermediateStepLoadAction<TError: Error>: Action {
     case inProgress
     case success
     case failure(TError)
 }
+
+extension IntermediateStepLoadAction: Equatable where TError: Equatable {}

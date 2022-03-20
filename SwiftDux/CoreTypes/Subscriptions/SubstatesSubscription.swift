@@ -66,9 +66,9 @@ extension SubstatesSubscription {
                   dispatchQueue: dispatchQueue)
     }
 
-    public convenience init<E: Equatable>(subscriber: Subscriber,
-                                          keyPath: KeyPath<StoreState, E>,
-                                          dispatchQueue: DispatchQueue = .main) {
+    public convenience init<TKeyPath: Equatable>(subscriber: Subscriber,
+                                                 keyPath: KeyPath<StoreState, TKeyPath>,
+                                                 dispatchQueue: DispatchQueue = .main) {
         self.init(subscriber: subscriber,
                   equatableKeyPaths: [EquatableKeyPath<StoreState>(keyPath)],
                   dispatchQueue: dispatchQueue)

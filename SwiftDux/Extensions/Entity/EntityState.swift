@@ -26,16 +26,18 @@ import Foundation
 
 // MARK: LoadState
 
-public enum EntityLoadState<TEntity: Equatable>: Equatable {
+public enum EntityLoadState<TEntity> {
     case idle
     case inProgress
     case success(TEntity)
     case failure(EntityError)
 }
 
-// MARK: EntityState
+extension EntityLoadState: Equatable where TEntity: Equatable {}
 
-public struct EntityState<TEntity: Equatable>: Equatable {
+// MARK: - EntityState
+
+public struct EntityState<TEntity> {
     public let loadState: EntityLoadState<TEntity>
     public let currentValue: TEntity?
 
@@ -55,9 +57,11 @@ public extension EntityState {
 
 }
 
-// MARK: EntityReducer
+extension EntityState: Equatable where TEntity: Equatable {}
 
-public enum EntityReducer<TEntity: Equatable> {
+// MARK: - EntityReducer
+
+public enum EntityReducer<TEntity> {
 
     public static func reduce(action: Action,
                               currentState: EntityState<TEntity>) -> EntityState<TEntity> {
