@@ -25,7 +25,7 @@
 import SwiftDux
 import XCTest
 
-public class MockStore<StoreState: StateProtocol>: StoreProtocol {
+public class MockStore<StoreState: StateProtocol>: StoreProtocol, TestDispatchingStoreProtocol {
 
     public typealias State = StoreState
     public typealias SubscriptionFields = (subscription: Any, subscriber: AnyObject)
@@ -75,22 +75,6 @@ public class MockStore<StoreState: StateProtocol>: StoreProtocol {
 
     public func reset(to state: State) {
         numResetCalls += 1
-    }
-
-}
-
-public extension MockStore {
-
-    func isAsyncAction(_ action: Action) -> Bool {
-        return action is AsyncAction<State>
-    }
-
-    var dispatchedNonAsyncActions: [Action] {
-        return dispatchedActions.filter { !isAsyncAction($0) }
-    }
-
-    var dispatchedAsyncActions: [Action] {
-        return dispatchedActions.filter { isAsyncAction($0) }
     }
 
 }

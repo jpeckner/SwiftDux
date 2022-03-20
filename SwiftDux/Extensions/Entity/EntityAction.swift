@@ -24,18 +24,22 @@
 
 import Foundation
 
-public enum EntityAction<TEntity: Equatable>: Action, Equatable {
+public enum EntityAction<TEntity>: Action {
     case idle
     case inProgress
     case success(TEntity)
     case failure(EntityError)
 }
 
+extension EntityAction: Equatable where TEntity: Equatable {}
+
+// MARK: - EntityActionCreator
+
 public protocol EntityActionCreator {}
 
 public extension EntityActionCreator {
 
-    static func loadEntity<TEntity: Equatable, TError: Error, TState: StateProtocol>(
+    static func loadEntity<TEntity, TError: Error, TState: StateProtocol>(
         _ loadBlock: EntityLoadBlock<TEntity, TError>
     ) -> AsyncAction<TState> {
         return AsyncAction<TState> { dispatch, _ in
@@ -59,8 +63,8 @@ public extension EntityActionCreator {
         }
     }
 
-    private static func dispatchTaskResult<TEntity: Equatable, TError: Error>(taskResult: Result<TEntity, TError>,
-                                                                              dispatch: DispatchFunction) {
+    private static func dispatchTaskResult<TEntity, TError: Error>(taskResult: Result<TEntity, TError>,
+                                                                   dispatch: DispatchFunction) {
         switch taskResult {
         case let .success(entity):
             dispatch(EntityAction<TEntity>.success(entity))

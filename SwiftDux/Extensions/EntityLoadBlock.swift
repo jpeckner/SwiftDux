@@ -24,7 +24,7 @@
 
 import Foundation
 
-public enum EntityLoadBlock<TEntity: Equatable, TError: Error> {
+public enum EntityLoadBlock<TEntity, TError: Error> {
     case nonThrowing((@escaping (Result<TEntity, TError>) -> Void) -> Void)
     case throwing((@escaping (Result<TEntity, TError>) -> Void) throws -> Void)
 }
