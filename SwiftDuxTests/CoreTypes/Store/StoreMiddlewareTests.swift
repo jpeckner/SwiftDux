@@ -26,53 +26,51 @@ import SwiftDux
 import SwiftDuxTestComponents
 import XCTest
 
-let firstMiddleware: Middleware<TestAppState> = { _, _ in
+let firstMiddleware: Middleware<TestAppAction, TestAppState> = { _, _ in
     return { next in
         return { action in
-            guard let stringAction = action as? SetStringSubstateAction,
-                let value = stringAction.value
+            guard case let .setString(value) = action,
+                  let unwrappedValue = value
             else {
                 next(action)
                 return
             }
 
-            let updatedAction = SetStringSubstateAction(value + " First Middleware")
-            next(updatedAction)
+            next(.setString(unwrappedValue + " First Middleware"))
         }
     }
 }
 
-let secondMiddleware: Middleware<TestAppState> = { _, _ in
+let secondMiddleware: Middleware<TestAppAction, TestAppState> = { _, _ in
     return { next in
         return { action in
-            guard let stringAction = action as? SetStringSubstateAction,
-                let value = stringAction.value
+            guard case let .setString(value) = action,
+                  let unwrappedValue = value
             else {
                 next(action)
                 return
             }
 
-            let updatedAction = SetStringSubstateAction(value + " Second Middleware")
-            next(updatedAction)
+            next(.setString(unwrappedValue + " Second Middleware"))
         }
     }
 }
 
-let dispatchingMiddleware: Middleware<TestAppState> = { dispatch, _ in
+let dispatchingMiddleware: Middleware<TestAppAction, TestAppState> = { dispatch, _ in
     return { next in
         return { action in
-            guard let intAction = action as? SetIntSubstateAction else {
+            guard case let .setInt(value) = action else {
                 next(action)
                 return
             }
 
-            dispatch(SetStringSubstateAction("\(intAction.value ?? 0)"))
+            dispatch(.setString("\(value ?? 0)"))
         }
     }
 }
 
 func stateAccessMiddleware(_ expectedStateValue: TestAppState,
-                           expectationToFulfill: XCTestExpectation) -> Middleware<TestAppState> {
+                           expectationToFulfill: XCTestExpectation) -> Middleware<TestAppAction, TestAppState> {
     return { dispatch, stateReceiverBlock in
         return { next in
             return { action in
@@ -89,12 +87,12 @@ func stateAccessMiddleware(_ expectedStateValue: TestAppState,
     }
 }
 
-let dispatchFromStateBlockMiddleware: Middleware<TestAppState> = { dispatch, stateReceiverBlock in
+let dispatchFromStateBlockMiddleware: Middleware<TestAppAction, TestAppState> = { dispatch, stateReceiverBlock in
     return { next in
         return { action in
             stateReceiverBlock { appState in
-                guard let stringAction = action as? SetStringSubstateAction,
-                    stringAction.value == "Start"
+                guard case let .setString(value) = action,
+                      value == "Start"
                 else {
                     next(action)
                     return
@@ -102,7 +100,7 @@ let dispatchFromStateBlockMiddleware: Middleware<TestAppState> = { dispatch, sta
 
                 // dispatch a new action
                 let previousStringValue = appState.stringSubstate.value ?? ""
-                dispatch(SetStringSubstateAction("Finish \(previousStringValue)"))
+                dispatch(.setString("Finish \(previousStringValue)"))
             }
         }
     }
@@ -119,7 +117,7 @@ class StoreMiddlewareTests: XCTestCase {
     }
 
     func testMiddlewaresAreChainedInOrderPassedToStore() {
-        let store = Store<TestAppState>(
+        let store = Store<TestAppAction, TestAppState>(
             reducer: TestAppStateReducer.reduce,
             initialState: TestAppState(),
             middleware: [
@@ -132,7 +130,7 @@ class StoreMiddlewareTests: XCTestCase {
         let expectedState = TestAppState(intValue: nil,
                                                stringValue: "OK First Middleware Second Middleware")
         waitUntilStateUpdates(to: expectedState,
-                              afterDispatching: SetStringSubstateAction("OK"),
+                              afterDispatching: TestAppAction.setString("OK"),
                               andNotifiying: verificationSubscription,
                               with: store)
     }
@@ -143,17 +141,17 @@ class StoreMiddlewareTests: XCTestCase {
         let middleware = stateAccessMiddleware(initialState,
                                                expectationToFulfill: expectationToFulfill)
 
-        let store = Store<TestAppState>(
+        let store = Store<TestAppAction, TestAppState>(
             reducer: TestAppStateReducer.reduce,
             initialState: initialState,
             middleware: [middleware]
         )
-        store.dispatch(NoOpAction())
+        store.dispatch(.noOp)
         waitForExpectations([expectationToFulfill])
     }
 
     func testMiddlewareCanDispatch() {
-        let store = Store<TestAppState>(
+        let store = Store<TestAppAction, TestAppState>(
             reducer: TestAppStateReducer.reduce,
             initialState: TestAppState(),
             middleware: [
@@ -167,13 +165,13 @@ class StoreMiddlewareTests: XCTestCase {
         let expectedState = TestAppState(intValue: nil,
                                                stringValue: "10 First Middleware Second Middleware")
         waitUntilStateUpdates(to: expectedState,
-                              afterDispatching: SetIntSubstateAction(10),
+                              afterDispatching: TestAppAction.setInt(10),
                               andNotifiying: verificationSubscription,
                               with: store)
     }
 
     func testMiddlewareCanDispatchFromStateReceiverBlock() {
-        let store = Store<TestAppState>(
+        let store = Store<TestAppAction, TestAppState>(
             reducer: TestAppStateReducer.reduce,
             initialState: TestAppState(),
             middleware: [dispatchFromStateBlockMiddleware]
@@ -183,20 +181,20 @@ class StoreMiddlewareTests: XCTestCase {
         let randomInitialValue = String(arc4random() % 10000)
         waitUntilStateUpdates(to: TestAppState(intValue: nil,
                                                      stringValue: randomInitialValue),
-                              afterDispatching: SetStringSubstateAction(randomInitialValue),
+                              afterDispatching: TestAppAction.setString(randomInitialValue),
                               andNotifiying: verificationSubscription,
                               with: store)
 
         let expectedState = TestAppState(intValue: nil,
                                                stringValue: "Finish \(randomInitialValue)")
         waitUntilStateUpdates(to: expectedState,
-                              afterDispatching: SetStringSubstateAction("Start"),
+                              afterDispatching: TestAppAction.setString("Start"),
                               andNotifiying: verificationSubscription,
                               with: store)
     }
 
     func testMiddlewareCanCallNextFromStateReceiverBlock() {
-        let store = Store<TestAppState>(
+        let store = Store<TestAppAction, TestAppState>(
             reducer: TestAppStateReducer.reduce,
             initialState: TestAppState(),
             middleware: [
@@ -210,7 +208,7 @@ class StoreMiddlewareTests: XCTestCase {
         let expectedState = TestAppState(intValue: nil,
                                                stringValue: "Don't start First Middleware Second Middleware")
         waitUntilStateUpdates(to: expectedState,
-                              afterDispatching: SetStringSubstateAction("Don't start"),
+                              afterDispatching: TestAppAction.setString("Don't start"),
                               andNotifiying: verificationSubscription,
                               with: store)
     }

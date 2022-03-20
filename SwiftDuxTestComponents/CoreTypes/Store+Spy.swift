@@ -24,19 +24,19 @@
 
 import SwiftDux
 
-public class SpyingStore<State: StateProtocol>: Store<State>, TestDispatchingStoreProtocol {
+public class SpyingStore<TAction: Action, TState: StateProtocol>: Store<TAction, TState>, TestDispatchingStoreProtocol {
 
-    public var dispatchedActions: [Action] {
+    public var dispatchedActions: [TAction] {
         actionCapture.dispatchedActions
     }
 
-    private var actionCapture: ActionCapture!
+    private var actionCapture: ActionCapture<TAction>!
 
-    public override init(reducer: @escaping Reducer<State>,
-                         initialState: State,
-                         middleware: [Middleware<State>] = [],
+    public override init(reducer: @escaping Reducer<TAction, TState>,
+                         initialState: TState,
+                         middleware: [Middleware<TAction, TState>] = [],
                          qualityOfService: QualityOfService = .userInitiated) {
-        let actionCapture = ActionCapture()
+        let actionCapture = ActionCapture<TAction>()
 
         super.init(reducer: reducer,
                    initialState: initialState,
@@ -46,7 +46,7 @@ public class SpyingStore<State: StateProtocol>: Store<State>, TestDispatchingSto
         self.actionCapture = actionCapture
     }
 
-    private static func buildActionSpyMiddleware(actionCapture: ActionCapture) -> Middleware<State> {
+    private static func buildActionSpyMiddleware(actionCapture: ActionCapture<TAction>) -> Middleware<TAction, TState> {
         return { dispatch, stateReceiverBlock in
             return { next in
                 return { action in
@@ -59,6 +59,6 @@ public class SpyingStore<State: StateProtocol>: Store<State>, TestDispatchingSto
 
 }
 
-private class ActionCapture {
-    var dispatchedActions: [Action] = []
+private class ActionCapture<TAction: Action> {
+    var dispatchedActions: [TAction] = []
 }

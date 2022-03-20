@@ -54,28 +54,36 @@ public extension TestAppState {
 
 public enum TestAppStateReducer {
 
-    public static func reduce(action: Action, state: TestAppState) -> TestAppState {
+    public static func reduce(action: TestAppAction, state: TestAppState) -> TestAppState {
         let intSubstate = intSubstateReducer(action: action, state: state.intSubstate)
         let stringSubstate = stringSubstateReducer(action: action, state: state.stringSubstate)
-        return TestAppState(intSubstate: intSubstate, stringSubstate: stringSubstate)
+
+        return TestAppState(intSubstate: intSubstate,
+                            stringSubstate: stringSubstate)
     }
 
-    private static func intSubstateReducer(action: Action, state: TestAppState.TestIntSubstate)
-        -> TestAppState.TestIntSubstate {
+    private static func intSubstateReducer(
+        action: TestAppAction,
+        state: TestAppState.TestIntSubstate
+    ) -> TestAppState.TestIntSubstate {
         switch action {
-        case let action as SetIntSubstateAction:
-            return TestAppState.TestIntSubstate(value: action.value)
-        default:
+        case let .setInt(value):
+            return TestAppState.TestIntSubstate(value: value)
+        case .noOp,
+             .setString:
             return state
         }
     }
 
-    private static func stringSubstateReducer(action: Action, state: TestAppState.TestStringSubstate)
-        -> TestAppState.TestStringSubstate {
+    private static func stringSubstateReducer(
+        action: TestAppAction,
+        state: TestAppState.TestStringSubstate
+    ) -> TestAppState.TestStringSubstate {
         switch action {
-        case let action as SetStringSubstateAction:
-            return TestAppState.TestStringSubstate(value: action.value)
-        default:
+        case let .setString(value):
+            return TestAppState.TestStringSubstate(value: value)
+        case .noOp,
+             .setInt:
             return state
         }
     }

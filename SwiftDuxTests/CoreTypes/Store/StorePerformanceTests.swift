@@ -35,7 +35,7 @@ class StorePerformanceTests: XCTestCase {
     private var dispatchGroup: DispatchGroup!
     private var subscribers: [Subscriber]!
     private var subscriptions: [StoreStateSubscription<Subscriber>]!
-    private var store: Store<TestAppState>!
+    private var store: Store<TestAppAction, TestAppState>!
 
     override func setUp() {
         super.setUp()
@@ -66,7 +66,7 @@ class StorePerformanceTests: XCTestCase {
             value += 1
 
             startMeasuring()
-            store.dispatch(SetIntSubstateAction(value))
+            store.dispatch(.setInt(value))
             dispatchGroup.wait()
             stopMeasuring()
         }
