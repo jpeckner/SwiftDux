@@ -25,23 +25,7 @@
 import SwiftDux
 
 public protocol TestDispatchingStoreProtocol {
-    associatedtype State: StateProtocol
+    associatedtype TAction: Action
 
-    var dispatchedActions: [Action] { get }
-}
-
-public extension TestDispatchingStoreProtocol {
-
-    var dispatchedNonAsyncActions: [Action] {
-        return dispatchedActions.filter { !isAsyncAction($0) }
-    }
-
-    var dispatchedAsyncActions: [Action] {
-        return dispatchedActions.filter { isAsyncAction($0) }
-    }
-
-    func isAsyncAction(_ action: Action) -> Bool {
-        return action is AsyncAction<State>
-    }
-
+    var dispatchedActions: [TAction] { get }
 }

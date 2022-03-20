@@ -69,9 +69,11 @@ public class MockStoreSubscription<State: StateProtocol>: StoreSubscriptionProto
 
 extension XCTestCase {
 
-    public func waitUntil<StoreState: StateProtocol>(_ subscription: MockStoreSubscription<StoreState>,
-                                                     subscribesTo store: Store<StoreState>,
-                                                     timeout: TimeInterval = defaultWaitTime) {
+    public func waitUntil<TAction: Action, TState: StateProtocol>(
+        _ subscription: MockStoreSubscription<TState>,
+        subscribesTo store: Store<TAction, TState>,
+        timeout: TimeInterval = defaultWaitTime
+    ) {
         let callbackExpectation = expectation(description: "callbackExpectation")
         subscription.processInitialStateCallback = { _ in callbackExpectation.fulfill() }
 
@@ -79,15 +81,15 @@ extension XCTestCase {
         waitForExpectations([callbackExpectation], withTimeout: timeout)
     }
 
-    public func waitUntilStateUpdates<StoreState: StateProtocol>(
-        to expectedValue: StoreState,
-        afterDispatching action: Action,
-        andNotifiying subscription: MockStoreSubscription<StoreState>,
-        with store: Store<StoreState>,
+    public func waitUntilStateUpdates<TAction: Action, TState: StateProtocol>(
+        to expectedValue: TState,
+        afterDispatching action: TAction,
+        andNotifiying subscription: MockStoreSubscription<TState>,
+        with store: Store<TAction, TState>,
         timeout: TimeInterval = defaultWaitTime,
         file: StaticString = #file,
         line: UInt = #line
-    ) where StoreState: Equatable {
+    ) where TState: Equatable {
         let callbackExpectation = expectation(description: "callbackExpectation")
         subscription.newStateCallback = { _, newState in
             XCTAssertEqual(newState, expectedValue,

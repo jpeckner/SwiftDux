@@ -29,7 +29,7 @@ import XCTest
 class StoreActionDispatchTests: XCTestCase {
 
     private var mockSubscription: MockStoreSubscription<TestAppState>!
-    private var store: Store<TestAppState>!
+    private var store: Store<TestAppAction, TestAppState>!
 
     override func setUp() {
         super.setUp()
@@ -44,37 +44,10 @@ class StoreActionDispatchTests: XCTestCase {
     }
 
     func testDispatchingPlainAction() {
-        let action = SetIntSubstateAction(5)
-
         waitUntilStateUpdates(to: TestAppState(intValue: 5, stringValue: nil),
-                              afterDispatching: action,
+                              afterDispatching: .setInt(5),
                               andNotifiying: mockSubscription,
                               with: store)
-    }
-
-    func testDispatchingAsyncAction() {
-        let asyncAction = AsyncAction<TestAppState> { dispatch, _ in
-            dispatch(SetIntSubstateAction(5))
-        }
-
-        waitUntilStateUpdates(to: TestAppState(intValue: 5, stringValue: nil),
-                              afterDispatching: asyncAction,
-                              andNotifiying: mockSubscription,
-                              with: store)
-    }
-
-    func testDispatchingAsyncActionWithDelayedDispatch() {
-        let asyncAction = AsyncAction<TestAppState> { dispatch, _ in
-            DispatchQueue.global(qos: .default).asyncAfter(deadline: .now() + 0.1) {
-                dispatch(SetIntSubstateAction(5))
-            }
-        }
-
-        waitUntilStateUpdates(to: TestAppState(intValue: 5, stringValue: nil),
-                              afterDispatching: asyncAction,
-                              andNotifiying: mockSubscription,
-                              with: store,
-                              timeout: 0.2)
     }
 
 }
