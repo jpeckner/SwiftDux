@@ -36,10 +36,6 @@ public class MockStore<TAction: Action, TState: StateProtocol>: StoreProtocol, T
     private(set) public var receivedSubscriptions: [SubscriptionFields] = []
     private(set) public var receivedUnsubscribers: [AnyObject] = []
 
-    private(set) public var numResetCalls = 0
-
-    public var stubState: TState?
-
     // MARK: Methods
 
     public init() {}
@@ -61,10 +57,6 @@ public class MockStore<TAction: Action, TState: StateProtocol>: StoreProtocol, T
     public func dispatch(_ action: TAction) {
         dispatchedActions.append(action)
         appendActionCallback?(action)
-    }
-
-    public func reset(to state: TState) {
-        numResetCalls += 1
     }
 
 }
