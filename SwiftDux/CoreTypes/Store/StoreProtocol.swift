@@ -23,6 +23,7 @@
 //  SOFTWARE.
 
 public protocol StoreProtocol:
+    AnyObject,
     DispatchingStoreProtocol,
     SubscribableStoreProtocol {}
 
