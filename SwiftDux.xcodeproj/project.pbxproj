@@ -432,8 +432,8 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 625E668B1C1FF97E0027C288 /* Build configuration list for PBXNativeTarget "SwiftDux" */;
 			buildPhases = (
-				625E667E1C1FF97E0027C288 /* Sources */,
 				625E66801C1FF97E0027C288 /* Headers */,
+				625E667E1C1FF97E0027C288 /* Sources */,
 			);
 			buildRules = (
 			);
@@ -454,6 +454,8 @@
 			buildRules = (
 			);
 			dependencies = (
+				CAE3C508297DBECE004F6D84 /* PBXTargetDependency */,
+				CAE3C50A297DBECE004F6D84 /* PBXTargetDependency */,
 				625E66A11C1FFA3C0027C288 /* PBXTargetDependency */,
 				CA0B17A9220CF8C80059C8C3 /* PBXTargetDependency */,
 			);
@@ -619,6 +621,14 @@
 			isa = PBXTargetDependency;
 			target = CA0B179A220CF5790059C8C3 /* SwiftDuxTestComponents */;
 			targetProxy = CA0B17A8220CF8C80059C8C3 /* PBXContainerItemProxy */;
+		};
+		CAE3C508297DBECE004F6D84 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			productRef = CAE3C507297DBECE004F6D84 /* Nimble */;
+		};
+		CAE3C50A297DBECE004F6D84 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			productRef = CAE3C509297DBECE004F6D84 /* Quick */;
 		};
 /* End PBXTargetDependency section */
 
@@ -983,6 +993,16 @@
 			productName = Nimble;
 		};
 		CA4BDFBB2776B5CA0078D00D /* Quick */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CA4BDFBA2776B5CA0078D00D /* XCRemoteSwiftPackageReference "Quick" */;
+			productName = Quick;
+		};
+		CAE3C507297DBECE004F6D84 /* Nimble */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CA4BDFB72776B5AF0078D00D /* XCRemoteSwiftPackageReference "Nimble" */;
+			productName = Nimble;
+		};
+		CAE3C509297DBECE004F6D84 /* Quick */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = CA4BDFBA2776B5CA0078D00D /* XCRemoteSwiftPackageReference "Quick" */;
 			productName = Quick;
