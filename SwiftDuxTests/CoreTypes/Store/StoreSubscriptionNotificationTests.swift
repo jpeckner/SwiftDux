@@ -30,7 +30,7 @@ class StoreSubscriptionNotificationTests: XCTestCase {
 
     private var mockSubscriber: MockStoreStateSubscriber<TestAppState>!
     private var mockSubscription: MockStoreSubscription<TestAppState>!
-    private var store: Store<TestAppState>!
+    private var store: Store<TestAppAction, TestAppState>!
 
     override func setUp() {
         super.setUp()
@@ -61,7 +61,7 @@ class StoreSubscriptionNotificationTests: XCTestCase {
             XCTAssertEqual(oldState, TestAppState(intValue: nil, stringValue: nil))
             callbackExpectation.fulfill()
         }
-        store.dispatch(SetIntSubstateAction(3))
+        store.dispatch(.setInt(3))
         waitForExpectations([callbackExpectation])
     }
 
@@ -73,13 +73,13 @@ class StoreSubscriptionNotificationTests: XCTestCase {
             XCTAssertEqual(newState, TestAppState(intValue: 3, stringValue: nil))
             callbackExpectation.fulfill()
         }
-        store.dispatch(SetIntSubstateAction(3))
+        store.dispatch(.setInt(3))
         waitForExpectations([callbackExpectation])
     }
 
     func testDispatchingFromObserver() {
         mockSubscription.processInitialStateCallback = { _ in
-            self.store.dispatch(SetIntSubstateAction(3))
+            self.store.dispatch(.setInt(3))
         }
 
         let callbackExpectation = expectation(description: "callbackExpectation")
@@ -109,7 +109,7 @@ class StoreSubscriptionNotificationTests: XCTestCase {
         store.subscribe(newSubscription)
 
         waitUntilStateUpdates(to: TestAppState(intValue: 3, stringValue: nil),
-                              afterDispatching: SetIntSubstateAction(3),
+                              afterDispatching: .setInt(3),
                               andNotifiying: newSubscription,
                               with: store)
         XCTAssertEqual(mockSubscription.receivedStates.count, 0)
@@ -120,13 +120,13 @@ class StoreSubscriptionNotificationTests: XCTestCase {
 
         var updateExpectation = expectation(description: "updateExpectation1")
         mockSubscription.newStateCallback = { _, _ in updateExpectation.fulfill() }
-        store.dispatch(SetIntSubstateAction(3))
+        store.dispatch(.setInt(3))
         waitForExpectations([updateExpectation])
 
         updateExpectation = expectation(description: "updateExpectation2")
         updateExpectation.isInverted = true
         store.unsubscribe(mockSubscriber)
-        store.dispatch(SetIntSubstateAction(5))
+        store.dispatch(.setInt(5))
         waitForExpectations([updateExpectation])
     }
 
@@ -135,13 +135,13 @@ class StoreSubscriptionNotificationTests: XCTestCase {
 
         var updateExpectation = expectation(description: "updateExpectation1")
         mockSubscription.newStateCallback = { _, _ in updateExpectation.fulfill() }
-        store.dispatch(SetIntSubstateAction(3))
+        store.dispatch(.setInt(3))
         waitForExpectations([updateExpectation])
 
         updateExpectation = expectation(description: "updateExpectation2")
         updateExpectation.isInverted = true
         mockSubscription.subscriber = nil
-        store.dispatch(SetIntSubstateAction(5))
+        store.dispatch(.setInt(5))
         waitForExpectations([updateExpectation])
     }
 

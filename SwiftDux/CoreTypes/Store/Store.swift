@@ -24,12 +24,12 @@
 
 import Foundation
 
-open class Store<State: StateProtocol>: StoreProtocol {
+open class Store<TAction: Action, TState: StateProtocol>: StoreProtocol {
 
-    private let reducer: Reducer<State>
-    private let middleware: [Middleware<State>]
+    private let reducer: Reducer<TAction, TState>
+    private let middleware: [Middleware<TAction, TState>]
     private let qualityOfService: QualityOfService
-    private var storeFields: StoreFields<State>
+    private var storeFields: StoreFields<TAction, TState>
 
     /// Initializes the store. Middleware is applied in the order found in the array.
     ///
@@ -38,57 +38,47 @@ open class Store<State: StateProtocol>: StoreProtocol {
     /// - parameter middleware: Ordered list of action pre-processors, acting before the root reducer.
     /// - parameter qualityOfService: QualityOfService for the OperationQueue on which state changes/subscriber updates
     ///             are sequentially processed.
-    public init(reducer: @escaping Reducer<State>,
-                initialState: State,
-                middleware: [Middleware<State>] = [],
+    public init(reducer: @escaping Reducer<TAction, TState>,
+                initialState: TState,
+                middleware: [Middleware<TAction, TState>] = [],
                 qualityOfService: QualityOfService = .userInitiated) {
         self.reducer = reducer
-        let completeMiddleware = middleware + [asyncActionMiddleware()]
-        self.middleware = completeMiddleware
+        self.middleware = middleware
         self.qualityOfService = qualityOfService
 
         self.storeFields = StoreFields(reducer: reducer,
                                        initialState: initialState,
-                                       middleware: completeMiddleware,
+                                       middleware: middleware,
                                        qualityOfService: qualityOfService)
     }
 
-    open func subscribe<Subscription: StoreSubscriptionProtocol>(
-        _ subscription: Subscription
-    ) where Subscription.StoreState == State {
+    open func subscribe<TSubscription: StoreSubscriptionProtocol>(
+        _ subscription: TSubscription
+    ) where TSubscription.StoreState == TState {
         storeFields.subscribe(subscription)
     }
 
-    open func unsubscribe<S: StoreSubscriber>(_ subscriber: S) where S.StoreState == State {
+    open func unsubscribe<TSubscriber: StoreSubscriber>(_ subscriber: TSubscriber) where TSubscriber.StoreState == TState {
         storeFields.unsubscribe(subscriber)
     }
 
-    open func dispatch(_ action: Action) {
+    open func dispatch(_ action: TAction) {
         storeFields.dispatchFunction(action)
-    }
-
-    open func reset(to state: State) {
-        storeFields.cancelOperations()
-
-        storeFields = StoreFields(reducer: reducer,
-                                  initialState: state,
-                                  middleware: middleware,
-                                  qualityOfService: qualityOfService)
     }
 
 }
 
-private class StoreFields<State: StateProtocol> {
+private class StoreFields<TAction: Action, TState: StateProtocol> {
 
-    private let reducer: Reducer<State>
-    private let middleware: [Middleware<State>]
+    private let reducer: Reducer<TAction, TState>
+    private let middleware: [Middleware<TAction, TState>]
     private let operationQueue: OperationQueue
 
-    private var subscriptions: Set<SubscriptionBox<State>> = []
+    private var subscriptions: Set<SubscriptionBox<TState>> = []
 
-    init(reducer: @escaping Reducer<State>,
-         initialState: State,
-         middleware: [Middleware<State>],
+    init(reducer: @escaping Reducer<TAction, TState>,
+         initialState: TState,
+         middleware: [Middleware<TAction, TState>],
          qualityOfService: QualityOfService) {
         self.reducer = reducer
         self.state = initialState
@@ -99,7 +89,7 @@ private class StoreFields<State: StateProtocol> {
         operationQueue.maxConcurrentOperationCount = 1
     }
 
-    private var state: State {
+    private var state: TState {
         didSet {
             subscriptions.forEach {
                 if $0.getSubscriberBlock() == nil {
@@ -113,15 +103,15 @@ private class StoreFields<State: StateProtocol> {
 
     // MARK: dispatchFunction
 
-    lazy var dispatchFunction: DispatchFunction = {
+    lazy var dispatchFunction: DispatchFunction<TAction> = {
         return
             middleware
             .reversed()
             .reduce({ [weak self] action in
                 self?.operationQueue.executeLocally { [weak self] in self?.reduce(action) }
             }, { dispatchFunction, middleware in
-                let dispatch: (Action) -> Void = { [weak self] in self?.dispatchFunction($0) }
-                let stateBlock: (@escaping StateReceiverBlock<State>) -> Void = { [weak self] stateReceiverBlock in
+                let dispatch: (TAction) -> Void = { [weak self] in self?.dispatchFunction($0) }
+                let stateBlock: (@escaping StateReceiverBlock<TState>) -> Void = { [weak self] stateReceiverBlock in
                     self?.operationQueue.executeLocally { [weak self] in self?.passState(to: stateReceiverBlock) }
                 }
 
@@ -129,11 +119,11 @@ private class StoreFields<State: StateProtocol> {
             })
     }()
 
-    private func reduce(_ action: Action) {
+    private func reduce(_ action: TAction) {
         state = reducer(action, state)
     }
 
-    private func passState(to stateReceiverBlock: StateReceiverBlock<State>) {
+    private func passState(to stateReceiverBlock: StateReceiverBlock<TState>) {
         stateReceiverBlock(state)
     }
 
@@ -141,13 +131,13 @@ private class StoreFields<State: StateProtocol> {
 
     func subscribe<Subscription: StoreSubscriptionProtocol>(
         _ subscription: Subscription
-    ) where Subscription.StoreState == State {
+    ) where Subscription.StoreState == TState {
         operationQueue.executeLocally { [weak self] in self?.performSubscribe(subscription) }
     }
 
     private func performSubscribe<Subscription: StoreSubscriptionProtocol>(
         _ subscription: Subscription
-    ) where Subscription.StoreState == State {
+    ) where Subscription.StoreState == TState {
         let box = SubscriptionBox(objectIdentifier: subscription.objectIdentifier,
                                   getSubscriberBlock: subscription.getSubscriber,
                                   processInitialStateBlock: subscription.processInitialState,
@@ -158,21 +148,15 @@ private class StoreFields<State: StateProtocol> {
 
     // MARK: Unsubscribe
 
-    func unsubscribe<S: StoreSubscriber>(_ subscriber: S) where S.StoreState == State {
+    func unsubscribe<S: StoreSubscriber>(_ subscriber: S) where S.StoreState == TState {
         operationQueue.executeLocally { [weak self] in self?.performUnsubscribe(subscriber) }
     }
 
-    private func performUnsubscribe<S: StoreSubscriber>(_ subscriber: S) where S.StoreState == State {
+    private func performUnsubscribe<S: StoreSubscriber>(_ subscriber: S) where S.StoreState == TState {
         guard let index = subscriptions.firstIndex(where: {
             return $0.getSubscriberBlock() === subscriber
         }) else { return }
         subscriptions.remove(at: index)
-    }
-
-    // MARK: Cancel operations
-
-    func cancelOperations() {
-        operationQueue.cancelAllOperations()
     }
 
 }

@@ -22,22 +22,11 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //  SOFTWARE.
 
-public typealias Middleware<State: StateProtocol> =
-    (@escaping DispatchFunction, @escaping (@escaping StateReceiverBlock<State>) -> Void)
-    -> (@escaping DispatchFunction)
-    -> DispatchFunction
+public typealias DispatchFunction<TAction: Action> = (TAction) -> Void
 
-func asyncActionMiddleware<State: StateProtocol>() -> Middleware<State> {
-    return { dispatch, stateReceiverBlock in
-        return { next in
-            return { action in
-                guard let asyncAction = action as? AsyncAction<State> else {
-                    next(action)
-                    return
-                }
+public typealias StateReceiverBlock<TState: StateProtocol> = (TState) -> Void
 
-                asyncAction.thunk(dispatch, stateReceiverBlock)
-            }
-        }
-    }
-}
+public typealias Middleware<TAction: Action, TState: StateProtocol> =
+    (@escaping DispatchFunction<TAction>, @escaping (@escaping StateReceiverBlock<TState>) -> Void)
+    -> (@escaping DispatchFunction<TAction>)
+    -> DispatchFunction<TAction>

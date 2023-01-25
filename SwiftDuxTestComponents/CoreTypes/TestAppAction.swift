@@ -24,22 +24,8 @@
 
 import SwiftDux
 
-public struct NoOpAction: Action {
-    public init() {}
-}
-
-public struct SetIntSubstateAction: Action {
-    public let value: Int?
-
-    public init(_ value: Int?) {
-        self.value = value
-    }
-}
-
-public struct SetStringSubstateAction: Action {
-    public let value: String?
-
-    public init(_ value: String?) {
-        self.value = value
-    }
+public enum TestAppAction: Action {
+    case noOp
+    case setInt(Int?)
+    case setString(String?)
 }

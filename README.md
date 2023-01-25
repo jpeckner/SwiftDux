@@ -10,7 +10,7 @@ SwiftDux is a Swift implementation of [Redux](https://github.com/reactjs/redux).
 
 ### CocoaPods
 
-Add `pod SwiftDux` to your `Podfile`, then run `pod install`.
+Add `pod 'SwiftDux', :git => 'https://github.com/jpeckner/SwiftDux.git', :branch => 'master'` to your `Podfile`, then run `pod install`.
 
 ### Carthage
 

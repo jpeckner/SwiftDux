@@ -22,4 +22,4 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //  SOFTWARE.
 
-public typealias Reducer<State> = (_ action: Action, _ state: State) -> State
+public typealias Reducer<TAction: Action, TState: StateProtocol> = (_ action: TAction, _ state: TState) -> TState

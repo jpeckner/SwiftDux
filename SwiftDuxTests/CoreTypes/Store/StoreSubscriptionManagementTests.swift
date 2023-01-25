@@ -28,7 +28,7 @@ import XCTest
 
 class StoreSubscriptionManagementTests: XCTestCase {
 
-    private var store: Store<TestAppState>!
+    private var store: Store<TestAppAction, TestAppState>!
 
     override func setUp() {
         super.setUp()
@@ -55,7 +55,7 @@ class StoreSubscriptionManagementTests: XCTestCase {
         subscription.deinitCallback = { deinitExpectation.fulfill() }
         subscription.subscriber = nil
         subscription = nil
-        store.dispatch(SetIntSubstateAction(5))
+        store.dispatch(.setInt(5))
         waitForExpectations([deinitExpectation])
     }
 
