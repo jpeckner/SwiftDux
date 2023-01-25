@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
   s.name = 'SwiftDuxTestComponents'
   s.module_name = 'SwiftDuxTestComponents'
-  s.version = '1.1.5'
+  s.version = '1.1.6'
   s.summary = 'Test components for SwiftDux framework.'
   s.homepage = 'https://github.com/jpeckner/SwiftDux'
   s.authors = { 'Justin Peckner' => 'pecknerj@gmail.com' }
