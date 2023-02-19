@@ -24,7 +24,9 @@
 
 import Foundation
 
-public enum EntityError: Error, Equatable {
-    case preloadError(underlyingError: EquatableError)
-    case loadError(underlyingError: EquatableError)
+public enum EntityError<TError: Error>: Error {
+    case preloadError(underlyingError: TError)
+    case loadError(underlyingError: TError)
 }
+
+extension EntityError: Equatable where TError: Equatable {}

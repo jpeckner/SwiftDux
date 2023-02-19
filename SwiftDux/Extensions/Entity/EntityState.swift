@@ -26,22 +26,22 @@ import Foundation
 
 // MARK: LoadState
 
-public enum EntityLoadState<TEntity> {
+public enum EntityLoadState<TEntity, TError: Error> {
     case idle
     case inProgress
     case success(TEntity)
-    case failure(EntityError)
+    case failure(TError)
 }
 
-extension EntityLoadState: Equatable where TEntity: Equatable {}
+extension EntityLoadState: Equatable where TEntity: Equatable, TError: Equatable {}
 
 // MARK: - EntityState
 
-public struct EntityState<TEntity> {
-    public let loadState: EntityLoadState<TEntity>
+public struct EntityState<TEntity, TError: Error> {
+    public let loadState: EntityLoadState<TEntity, TError>
     public let currentValue: TEntity?
 
-    public init(loadState: EntityLoadState<TEntity>,
+    public init(loadState: EntityLoadState<TEntity, TError>,
                 currentValue: TEntity?) {
         self.loadState = loadState
         self.currentValue = currentValue
@@ -57,15 +57,15 @@ public extension EntityState {
 
 }
 
-extension EntityState: Equatable where TEntity: Equatable {}
+extension EntityState: Equatable where TEntity: Equatable, TError: Equatable {}
 
 // MARK: - EntityReducer
 
-public enum EntityReducer<TEntity> {
+public enum EntityReducer<TEntity, TError: Error> {
 
     public static func reduce(action: Action,
-                              currentState: EntityState<TEntity>) -> EntityState<TEntity> {
-        guard let entityAction = action as? EntityAction<TEntity> else {
+                              currentState: EntityState<TEntity, TError>) -> EntityState<TEntity, TError> {
+        guard let entityAction = action as? EntityAction<TEntity, TError> else {
             return currentState
         }
 

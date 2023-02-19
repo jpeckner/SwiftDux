@@ -26,24 +26,25 @@ import Foundation
 
 // MARK: - GuaranteedEntityLoadState
 
-public enum GuaranteedEntityLoadState<TEntity>: Action {
+public enum GuaranteedEntityLoadState<TEntity, TError: Error>: Action {
     case idle
     case inProgress
     case success(TEntity)
-    case failure(EntityError)
+    case failure(TError)
 }
 
-extension GuaranteedEntityLoadState: Equatable where TEntity: Equatable {}
+extension GuaranteedEntityLoadState: Equatable where TEntity: Equatable, TError: Equatable {}
 
 // MARK: - GuaranteedEntityState
 
 public protocol GuaranteedEntityState {
     associatedtype TEntity
+    associatedtype TError: Error
 
     static var fallbackValue: TEntity { get }
 
-    init(loadState: GuaranteedEntityLoadState<TEntity>)
-    var loadState: GuaranteedEntityLoadState<TEntity> { get }
+    init(loadState: GuaranteedEntityLoadState<TEntity, TError>)
+    var loadState: GuaranteedEntityLoadState<TEntity, TError> { get }
 }
 
 public extension GuaranteedEntityState {
@@ -74,18 +75,20 @@ public extension GuaranteedEntityState {
 
 // MARK: GuaranteedEntityReducer
 
-public enum GuaranteedEntityReducer<State: GuaranteedEntityState> {
+public enum GuaranteedEntityReducer<TState: GuaranteedEntityState> {
 
-    public static func reduce(action: Action, currentState: State) -> State {
-        guard let entityAction = action as? GuaranteedEntityAction<State.TEntity> else { return currentState }
+    public static func reduce(action: Action, currentState: TState) -> TState {
+        guard let entityAction = action as? GuaranteedEntityAction<TState.TEntity, TState.TError> else {
+            return currentState
+        }
 
         switch entityAction {
         case .inProgress:
-            return State(loadState: .inProgress)
+            return TState(loadState: .inProgress)
         case let .success(entity):
-            return State(loadState: .success(entity))
+            return TState(loadState: .success(entity))
         case let .failure(entityError):
-            return State(loadState: .failure(entityError))
+            return TState(loadState: .failure(entityError))
         }
     }
 

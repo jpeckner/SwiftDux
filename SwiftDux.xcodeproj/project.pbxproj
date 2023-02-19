@@ -27,7 +27,6 @@
 		CA39F98E220A0E56006F505A /* StoreSubscriptionNotificationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F39F371D3EE46A00DFFE62 /* StoreSubscriptionNotificationTests.swift */; };
 		CA4BDF772776B1C40078D00D /* EntityLoadBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA5EC9EC245E3E1D007FFE3B /* EntityLoadBlock.swift */; };
 		CA4BDF782776B1C40078D00D /* EntityError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA5ECA01245E42C6007FFE3B /* EntityError.swift */; };
-		CA4BDF792776B1C40078D00D /* EquatableError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA5EC9FF245E4294007FFE3B /* EquatableError.swift */; };
 		CA4BDF882776B22D0078D00D /* EntityState.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA5EC9F4245E3E1D007FFE3B /* EntityState.swift */; };
 		CA4BDF892776B22D0078D00D /* EntityAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA5EC9F5245E3E1D007FFE3B /* EntityAction.swift */; };
 		CA4BDF8E2776B2310078D00D /* GuaranteedEntityAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA5EC9F2245E3E1D007FFE3B /* GuaranteedEntityAction.swift */; };
@@ -119,7 +118,6 @@
 		CA5EC9F2245E3E1D007FFE3B /* GuaranteedEntityAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuaranteedEntityAction.swift; sourceTree = "<group>"; };
 		CA5EC9F4245E3E1D007FFE3B /* EntityState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntityState.swift; sourceTree = "<group>"; };
 		CA5EC9F5245E3E1D007FFE3B /* EntityAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntityAction.swift; sourceTree = "<group>"; };
-		CA5EC9FF245E4294007FFE3B /* EquatableError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EquatableError.swift; sourceTree = "<group>"; };
 		CA5ECA01245E42C6007FFE3B /* EntityError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityError.swift; sourceTree = "<group>"; };
 		CA5ECA28245E4A43007FFE3B /* EntityReducerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntityReducerTests.swift; sourceTree = "<group>"; };
 		CA5ECA29245E4A43007FFE3B /* EntityStateTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntityStateTests.swift; sourceTree = "<group>"; };
@@ -246,7 +244,6 @@
 				CA5EC9F0245E3E1D007FFE3B /* GuaranteedEntity */,
 				CA5EC9ED245E3E1D007FFE3B /* IntermediateStep */,
 				CA5ECA01245E42C6007FFE3B /* EntityError.swift */,
-				CA5EC9FF245E4294007FFE3B /* EquatableError.swift */,
 				CA5EC9EC245E3E1D007FFE3B /* EntityLoadBlock.swift */,
 				CA2636492204D8810012B60E /* OperationQueue+Current.swift */,
 			);
@@ -556,7 +553,6 @@
 				CA4BDF772776B1C40078D00D /* EntityLoadBlock.swift in Sources */,
 				CA89B87B22B2C70D00CBECE0 /* EquatableKeyPath.swift in Sources */,
 				CA4BDF892776B22D0078D00D /* EntityAction.swift in Sources */,
-				CA4BDF792776B1C40078D00D /* EquatableError.swift in Sources */,
 				CA26364A2204D8810012B60E /* OperationQueue+Current.swift in Sources */,
 				625E66BF1C1FFC880027C288 /* StateProtocol.swift in Sources */,
 				CA4BDF942776B2340078D00D /* IntermediateStepLoadState.swift in Sources */,

@@ -32,7 +32,7 @@ class EntityStateTests: QuickSpec {
     // swiftlint:disable implicitly_unwrapped_optional
     override func spec() {
 
-        var result: EntityState<StubEntity>!
+        var result: EntityState<StubEntity, StubError>!
 
         describe("init()") {
 
