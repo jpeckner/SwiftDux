@@ -35,7 +35,7 @@ class GuaranteedEntityStateTests: QuickSpec {
 
         let stubValue: StubEntity = .stubValue()
 
-        var result: StubGuaranteedEntityState!
+        var result: StubGuaranteedEntityState<EntityError<StubError>>!
 
         describe("init()") {
 
@@ -58,14 +58,14 @@ class GuaranteedEntityStateTests: QuickSpec {
 
                 it("returns the value embedded in loadState") {
                     expect(result.currentValue) == stubValue
-                    expect(result.currentValue) != StubGuaranteedEntityState.fallbackValue
+                    expect(result.currentValue) != StubGuaranteedEntityState<EntityError<StubError>>.fallbackValue
                 }
             }
 
-            let fallbackLoadStates: [GuaranteedEntityLoadState<StubEntity>] = [
+            let fallbackLoadStates: [GuaranteedEntityLoadState<StubEntity, EntityError>] = [
                 .idle,
                 .inProgress,
-                .failure(.loadError(underlyingError: EquatableError(StubError.plainError)))
+                .failure(.loadError(underlyingError: StubError.plainError))
             ]
 
             for loadState in fallbackLoadStates {
@@ -76,7 +76,7 @@ class GuaranteedEntityStateTests: QuickSpec {
                     }
 
                     it("returns the fallback state value") {
-                        expect(result.currentValue) == StubGuaranteedEntityState.fallbackValue
+                        expect(result.currentValue) == StubGuaranteedEntityState<EntityError<StubError>>.fallbackValue
                     }
                 }
 
@@ -86,7 +86,7 @@ class GuaranteedEntityStateTests: QuickSpec {
 
         describe("hasCompletedLoading") {
 
-            let nonFinishedStates: [GuaranteedEntityLoadState<StubEntity>] = [
+            let nonFinishedStates: [GuaranteedEntityLoadState<StubEntity, EntityError<StubError>>] = [
                 .idle,
                 .inProgress,
             ]
@@ -105,9 +105,9 @@ class GuaranteedEntityStateTests: QuickSpec {
 
             }
 
-            let finishedStates: [GuaranteedEntityLoadState<StubEntity>] = [
+            let finishedStates: [GuaranteedEntityLoadState<StubEntity, EntityError<StubError>>] = [
                 .success(stubValue),
-                .failure(.loadError(underlyingError: EquatableError(StubError.plainError)))
+                .failure(.loadError(underlyingError: StubError.plainError))
             ]
 
             for loadState in finishedStates {

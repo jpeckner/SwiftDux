@@ -24,11 +24,11 @@
 
 import Foundation
 
-public enum EntityAction<TEntity>: Action {
+public enum EntityAction<TEntity, TError: Error>: Action {
     case idle
     case inProgress
     case success(TEntity)
-    case failure(EntityError)
+    case failure(TError)
 }
 
-extension EntityAction: Equatable where TEntity: Equatable {}
+extension EntityAction: Equatable where TEntity: Equatable, TError: Equatable {}

@@ -24,17 +24,22 @@
 
 import SwiftDux
 
-public struct StubGuaranteedEntityState: GuaranteedEntityState, Equatable {
+public struct StubGuaranteedEntityState<TError: Error>: GuaranteedEntityState {
     public typealias TEntity = StubEntity
-    public static let fallbackValue = StubEntity(stringValue: "FallbackValue",
-                                                 intValue: 10,
-                                                 doubleValue: 20.0)
 
-    public let loadState: GuaranteedEntityLoadState<TEntity>
+    public static var fallbackValue: StubEntity {
+        StubEntity(stringValue: "FallbackValue",
+                   intValue: 10,
+                   doubleValue: 20.0)
+    }
 
-    public init(loadState: GuaranteedEntityLoadState<TEntity>) {
+    public let loadState: GuaranteedEntityLoadState<TEntity, TError>
+
+    public init(loadState: GuaranteedEntityLoadState<TEntity, TError>) {
         self.loadState = loadState
     }
 }
 
-public typealias StubGuaranteedEntityReducer = GuaranteedEntityReducer<StubGuaranteedEntityState>
+extension StubGuaranteedEntityState: Equatable where TError: Equatable {}
+
+public typealias StubGuaranteedEntityReducer<TError: Error> = GuaranteedEntityReducer<StubGuaranteedEntityState<TError>>

@@ -35,13 +35,18 @@ class EntityReducerTests: QuickSpec {
 
         describe("reduce") {
 
+            typealias TState = EntityState<StubEntity, EntityError<StubError>>
+            typealias TAction = EntityAction<StubEntity, EntityError<StubError>>
+
             let stubEntity = StubEntity.stubValue()
 
             context("when the action is not an EntityAction") {
-                let currentState = EntityState<StubEntity>(loadState: .inProgress,
-                                                           currentValue: nil)
+                let currentState = TState(
+                    loadState: .inProgress,
+                    currentValue: nil
+                )
 
-                var resultState: EntityState<StubEntity>!
+                var resultState: TState!
 
                 beforeEach {
                     resultState = EntityReducer.reduce(action: StubAction.genericAction,
@@ -54,13 +59,15 @@ class EntityReducerTests: QuickSpec {
             }
 
             context("when the action is .idle") {
-                let currentState = EntityState<StubEntity>(loadState: .inProgress,
-                                                           currentValue: stubEntity)
+                let currentState = TState(
+                    loadState: .inProgress,
+                    currentValue: stubEntity
+                )
 
-                var resultState: EntityState<StubEntity>!
+                var resultState: TState!
 
                 beforeEach {
-                    resultState = EntityReducer.reduce(action: EntityAction<StubEntity>.idle,
+                    resultState = EntityReducer.reduce(action: TAction.idle,
                                                        currentState: currentState)
                 }
 
@@ -74,13 +81,15 @@ class EntityReducerTests: QuickSpec {
             }
 
             context("when the action is .inProgress") {
-                let currentState = EntityState<StubEntity>(loadState: .idle,
-                                                           currentValue: stubEntity)
+                let currentState = TState(
+                    loadState: .idle,
+                    currentValue: stubEntity
+                )
 
-                var resultState: EntityState<StubEntity>!
+                var resultState: TState!
 
                 beforeEach {
-                    resultState = EntityReducer.reduce(action: EntityAction<StubEntity>.inProgress,
+                    resultState = EntityReducer.reduce(action: TAction.inProgress,
                                                        currentState: currentState)
                 }
 
@@ -94,16 +103,18 @@ class EntityReducerTests: QuickSpec {
             }
 
             context("when the action is .success") {
-                let currentState = EntityState<StubEntity>(loadState: .inProgress,
-                                                           currentValue: stubEntity)
+                let currentState = TState(
+                    loadState: .inProgress,
+                    currentValue: stubEntity
+                )
                 let newValue = StubEntity(stringValue: "XYZ",
                                           intValue: 200,
                                           doubleValue: 7.5)
 
-                var resultState: EntityState<StubEntity>!
+                var resultState: TState!
 
                 beforeEach {
-                    resultState = EntityReducer.reduce(action: EntityAction<StubEntity>.success(newValue),
+                    resultState = EntityReducer.reduce(action: TAction.success(newValue),
                                                        currentState: currentState)
                 }
 
@@ -117,15 +128,17 @@ class EntityReducerTests: QuickSpec {
             }
 
             context("when the action is .failure") {
-                let currentState = EntityState<StubEntity>(loadState: .inProgress,
-                                                           currentValue: stubEntity)
-                let entityError = EntityError.loadError(underlyingError: EquatableError(StubError.plainError))
+                let currentState = TState(
+                    loadState: .inProgress,
+                    currentValue: stubEntity
+                )
+                let entityError = EntityError.loadError(underlyingError: StubError.plainError)
 
-                var resultState: EntityState<StubEntity>!
+                var resultState: TState!
 
                 beforeEach {
                     resultState = EntityReducer.reduce(
-                        action: EntityAction<StubEntity>.failure(entityError),
+                        action: EntityAction<StubEntity, EntityError<StubError>>.failure(entityError),
                         currentState: currentState
                     )
                 }

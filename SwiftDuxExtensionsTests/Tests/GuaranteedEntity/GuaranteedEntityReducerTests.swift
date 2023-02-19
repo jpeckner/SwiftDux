@@ -35,10 +35,10 @@ class GuaranteedEntityReducerTests: QuickSpec {
 
         describe("reduce") {
 
-            var resultState: StubGuaranteedEntityState!
+            var resultState: StubGuaranteedEntityState<EntityError<StubError>>!
 
             context("when the action is not a GuaranteedEntityAction") {
-                let currentState = StubGuaranteedEntityState(loadState: .inProgress)
+                let currentState = StubGuaranteedEntityState<EntityError<StubError>>(loadState: .inProgress)
 
                 beforeEach {
                     resultState = StubGuaranteedEntityReducer.reduce(action: StubAction.genericAction,
@@ -51,11 +51,11 @@ class GuaranteedEntityReducerTests: QuickSpec {
             }
 
             context("when the action is .inProgress") {
-                let currentState = StubGuaranteedEntityState(loadState: .idle)
+                let currentState = StubGuaranteedEntityState<EntityError<StubError>>(loadState: .idle)
 
                 beforeEach {
                     resultState = StubGuaranteedEntityReducer.reduce(
-                        action: GuaranteedEntityAction<StubEntity>.inProgress,
+                        action: GuaranteedEntityAction<StubEntity, EntityError<StubError>>.inProgress,
                         currentState: currentState
                     )
                 }
@@ -65,19 +65,19 @@ class GuaranteedEntityReducerTests: QuickSpec {
                 }
 
                 it("returns the fallbackValue for currentValue") {
-                    expect(resultState.currentValue) == StubGuaranteedEntityState.fallbackValue
+                    expect(resultState.currentValue) == StubGuaranteedEntityState<EntityError<StubError>>.fallbackValue
                 }
             }
 
             context("when the action is .success") {
-                let currentState = StubGuaranteedEntityState(loadState: .inProgress)
+                let currentState = StubGuaranteedEntityState<EntityError<StubError>>(loadState: .inProgress)
                 let newValue = StubEntity(stringValue: "XYZ",
                                           intValue: 200,
                                           doubleValue: 7.5)
 
                 beforeEach {
                     resultState = StubGuaranteedEntityReducer.reduce(
-                        action: GuaranteedEntityAction<StubEntity>.success(newValue),
+                        action: GuaranteedEntityAction<StubEntity, EntityError<StubError>>.success(newValue),
                         currentState: currentState
                     )
                 }
@@ -92,11 +92,11 @@ class GuaranteedEntityReducerTests: QuickSpec {
             }
 
             context("when the action is .failure") {
-                let currentState = StubGuaranteedEntityState(loadState: .inProgress)
-                let entityError = EntityError.loadError(underlyingError: EquatableError(StubError.plainError))
+                let currentState = StubGuaranteedEntityState<EntityError<StubError>>(loadState: .inProgress)
+                let entityError = EntityError.loadError(underlyingError: StubError.plainError)
 
                 beforeEach {
-                    let action = GuaranteedEntityAction<StubEntity>.failure(entityError)
+                    let action = GuaranteedEntityAction<StubEntity, EntityError<StubError>>.failure(entityError)
                     resultState = StubGuaranteedEntityReducer.reduce(action: action,
                                                                      currentState: currentState)
                 }
@@ -106,7 +106,7 @@ class GuaranteedEntityReducerTests: QuickSpec {
                 }
 
                 it("returns the fallback value for currentValue") {
-                    expect(resultState.currentValue) == StubGuaranteedEntityState.fallbackValue
+                    expect(resultState.currentValue) == StubGuaranteedEntityState<EntityError<StubError>>.fallbackValue
                 }
             }
 
