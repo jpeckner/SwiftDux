@@ -32,3 +32,5 @@ public enum EntityAction<TEntity, TError: Error>: Action {
 }
 
 extension EntityAction: Equatable where TEntity: Equatable, TError: Equatable {}
+
+extension EntityAction: Sendable where TEntity: Sendable {}

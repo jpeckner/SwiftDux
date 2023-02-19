@@ -35,6 +35,8 @@ public enum GuaranteedEntityLoadState<TEntity, TError: Error>: Action {
 
 extension GuaranteedEntityLoadState: Equatable where TEntity: Equatable, TError: Equatable {}
 
+extension GuaranteedEntityLoadState: Sendable where TEntity: Sendable {}
+
 // MARK: - GuaranteedEntityState
 
 public protocol GuaranteedEntityState {

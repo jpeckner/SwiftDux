@@ -31,3 +31,5 @@ public enum GuaranteedEntityAction<TEntity, TError: Error>: Action {
 }
 
 extension GuaranteedEntityAction: Equatable where TEntity: Equatable, TError: Equatable {}
+
+extension GuaranteedEntityAction: Sendable where TEntity: Sendable {}
