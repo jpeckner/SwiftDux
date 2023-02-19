@@ -35,6 +35,8 @@ public enum EntityLoadState<TEntity, TError: Error> {
 
 extension EntityLoadState: Equatable where TEntity: Equatable, TError: Equatable {}
 
+extension EntityLoadState: Sendable where TEntity: Sendable {}
+
 // MARK: - EntityState
 
 public struct EntityState<TEntity, TError: Error> {

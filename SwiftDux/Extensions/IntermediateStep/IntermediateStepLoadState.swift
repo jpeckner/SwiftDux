@@ -24,7 +24,7 @@
 
 import Foundation
 
-public enum IntermediateStepLoadState<TError: Error> {
+public enum IntermediateStepLoadState<TError: Error>: Sendable {
     case inProgress
     case success
     case failure(TError)
