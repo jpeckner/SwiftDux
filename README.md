@@ -8,17 +8,13 @@ SwiftDux is a Swift implementation of [Redux](https://github.com/reactjs/redux).
 
 ## Installing
 
-### CocoaPods
+### Swift Package Manager (SPM)
 
-Add `pod 'SwiftDux', :git => 'https://github.com/jpeckner/SwiftDux.git', :branch => 'master'` to your `Podfile`, then run `pod install`.
-
-### Carthage
-
-Add `github "jpeckner/SwiftDux"` to your `Cartfile`, then run `carthage update SwiftDux --platform iOS`.
+Point SPM to https://github.com/jpeckner/SwiftDux.git (matching to an exact version is recommended)
 
 ### Manually
 
-Simply add `SwiftDux.xcodeproj` to your workspace.
+If you prefer not to use SPM, you can integrate SwiftDux into your project manually.
 
 ## License
 
