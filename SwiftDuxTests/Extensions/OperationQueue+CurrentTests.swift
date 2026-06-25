@@ -24,7 +24,7 @@
 
 import XCTest
 
-private class MockOperationQueue: OperationQueue {
+private class MockOperationQueue: OperationQueue, @unchecked Sendable {
 
     private(set) var numAddOperationCalls = 0
 

@@ -5,7 +5,7 @@ import PackageDescription
 let package = Package(
     name: "SwiftDux",
     platforms: [
-        .iOS(.v11),
+        .iOS(.v15),
     ],
     products: [
         .library(name: "SwiftDux", targets: ["SwiftDux"]),
