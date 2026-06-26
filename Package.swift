@@ -11,10 +11,6 @@ let package = Package(
         .library(name: "SwiftDux", targets: ["SwiftDux"]),
         .library(name: "SwiftDuxTestComponents", targets: ["SwiftDuxTestComponents"]),
     ],
-    dependencies: [
-        .package(url: "https://github.com/Quick/Quick.git", exact: "4.0.0"),
-        .package(url: "https://github.com/Quick/Nimble.git", exact: "9.2.1"),
-    ],
     targets: [
         .target(
             name: "SwiftDux",
@@ -32,21 +28,9 @@ let package = Package(
             dependencies: [
                 "SwiftDux",
                 "SwiftDuxTestComponents",
-                .product(name: "Quick", package: "Quick"),
-                .product(name: "Nimble", package: "Nimble"),
             ],
             path: "SwiftDuxTests",
             exclude: ["Info.plist"]
-        ),
-        .testTarget(
-            name: "SwiftDuxExtensionsTests",
-            dependencies: [
-                "SwiftDux",
-                "SwiftDuxTestComponents",
-                .product(name: "Quick", package: "Quick"),
-                .product(name: "Nimble", package: "Nimble"),
-            ],
-            path: "SwiftDuxExtensionsTests"
         ),
     ]
 )
