@@ -31,7 +31,7 @@ class GuaranteedEntityStateTests: QuickSpec {
 
     // swiftlint:disable function_body_length
     // swiftlint:disable implicitly_unwrapped_optional
-    override func spec() {
+    override class func spec() {
 
         let stubValue: StubEntity = .stubValue()
 

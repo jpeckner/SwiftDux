@@ -30,7 +30,7 @@ import SwiftDuxTestComponents
 class IntermediateStepReducerTests: QuickSpec {
 
     // swiftlint:disable implicitly_unwrapped_optional
-    override func spec() {
+    override class func spec() {
 
         var result: IntermediateStepLoadState<StubError>!
 

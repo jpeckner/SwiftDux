@@ -30,7 +30,7 @@ import SwiftDuxTestComponents
 class EntityStateTests: QuickSpec {
 
     // swiftlint:disable implicitly_unwrapped_optional
-    override func spec() {
+    override class func spec() {
 
         var result: EntityState<StubEntity, StubError>!
 
