@@ -25,6 +25,7 @@
 import Foundation
 import SwiftDux
 
+@Observable
 public class SpyingStore<TAction: Action, TState: StateProtocol>: Store<TAction, TState>, TestDispatchingStoreProtocol {
 
     public var dispatchedActions: [TAction] {
