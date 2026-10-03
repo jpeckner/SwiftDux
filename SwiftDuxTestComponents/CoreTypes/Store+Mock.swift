@@ -61,6 +61,25 @@ public class MockStore<TAction: Action, TState: StateProtocol>: StoreProtocol, T
 
 }
 
+public extension MockStore {
+
+    typealias NoDispatchVerificationBlock = () -> Void
+
+    func verifyNoDispatches(
+        afterExecuting block: () -> Void
+    ) -> NoDispatchVerificationBlock {
+        let preExecutionDispatchCount = dispatchedActions.count
+        block()
+
+        Thread.sleep(forTimeInterval: defaultWaitTime)
+
+        return {
+            XCTAssertEqual(self.dispatchedActions.count, preExecutionDispatchCount)
+        }
+    }
+
+}
+
 public extension XCTestCase {
 
     func waitFor<TAction: Action, TState: StateProtocol>(
@@ -80,22 +99,6 @@ public extension XCTestCase {
 
         block()
         waitForExpectations([callbackExpectation], withTimeout: timeout)
-    }
-
-    typealias NoDispatchVerificationBlock = () -> Void
-
-    func verifyNoDispatches<TAction: Action, TState: StateProtocol>(
-        from mockStore: MockStore<TAction, TState>,
-        afterExecuting block: () -> Void
-    ) -> NoDispatchVerificationBlock {
-        let preExecutionDispatchCount = mockStore.dispatchedActions.count
-        block()
-
-        Thread.sleep(forTimeInterval: defaultWaitTime)
-
-        return {
-            XCTAssertEqual(mockStore.dispatchedActions.count, preExecutionDispatchCount)
-        }
     }
 
 }

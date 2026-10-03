@@ -31,7 +31,7 @@ class EntityReducerTests: QuickSpec {
 
     // swiftlint:disable function_body_length
     // swiftlint:disable implicitly_unwrapped_optional
-    override func spec() {
+    override class func spec() {
 
         describe("reduce") {
 
